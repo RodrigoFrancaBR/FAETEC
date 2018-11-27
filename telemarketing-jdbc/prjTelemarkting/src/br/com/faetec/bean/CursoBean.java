@@ -1,4 +1,4 @@
-package br.com.bean;
+package br.com.faetec.bean;
 
 import java.util.List;
 
