@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="body">
+		<h:form>
+			<h:messages id="messages" />
+			<fieldset>
+
+				<legend>Detalhes do Curso</legend>
+
+				<h:panelGrid columns="2">
+
+					<h:outputLabel for="nmCurso" value="Curso:" />
+					<h:inputText id="nmCurso" value="#{cursoBean.curso.nome}"
+						required="true" requiredMessage="Nome é obrigatório"
+						validatorMessage="Nome não pode ser superior a 30" />
+
+
+					<h:outputLabel for="desc" value="Descrição:" />
+					<h:inputText id="desc" value="#{cursoBean.curso.descricao}"
+						required="true" requiredMessage="Descrição obrigatória"
+						validatorMessage="Descrição não pode ser superior a 200" />
+
+					<h:commandButton value="Salvar" action="#{cursoBean.salvar}">
+						<!-- <f:ajax execute="nmCurso desc" render="tabCursos" /> -->
+					</h:commandButton>
+
+					<h:commandButton value="limpar" action="#{cursoBean.limpar}" />
+				</h:panelGrid>
+
+			</fieldset>
+		</h:form>
+		
+		<h:form>
+			<fieldset>
+				<legend>Cursos Cadastrados</legend>
+				<h:panelGrid>
+					<h:dataTable value="#{cursoBean.cursos}" var="curso" border="1"
+						id="tabCursos">
+
+						<h:column>
+							<f:facet name="header">Curso</f:facet>
+							<h:outputText value="#{curso.nome}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Descrição</f:facet>
+							<h:outputText value="#{curso.descricao}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Editar</f:facet>
+							<h:commandLink value="Editar" action="#{cursoBean.editar(curso)}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Excluir</f:facet>
+							<h:commandLink value="Excluir"
+								actionListener="#{cursoBean.excluir(curso)}" />
+						</h:column>
+
+					</h:dataTable>
+
+				</h:panelGrid>
+
+			</fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="body">
+		<h:form>
+			<h:messages id="messages" />
+			<fieldset>
+				<legend>Dados Pessoais</legend>
+
+				<h:panelGrid columns="10" id="panelPessoa">
+
+					<h:outputLabel for="nm" value="Nome:" />
+					<h:inputText id="nm" value="#{pessoaBean.pessoa.nome}" />
+
+					<h:outputLabel for="sn" value="Sobrenome:" />
+					<h:inputText id="sn" value="#{pessoaBean.pessoa.sobreNome}" />
+
+					<h:outputLabel for="cpf" value="CPF:" />
+					<h:inputText id="cpf" value="#{pessoaBean.pessoa.cpf}" />
+
+					<h:outputLabel for="email" value="E-mail:" />
+					<h:inputText id="email" value="#{pessoaBean.pessoa.email}" />
+
+					<h:outputLabel for="nmPai" value="Pai:" />
+					<h:inputText id="nmPai" value="#{pessoaBean.pessoa.pai}" />
+
+					<h:outputLabel for="nmMae" value="Mãe:" />
+					<h:inputText id="nmMae" value="#{pessoaBean.pessoa.mae}" />
+
+					<h:outputLabel for="cep" value="CEP:" />
+					<h:inputText id="cep" value="#{pessoaBean.pessoa.cep}" />
+
+					<h:outputLabel for="end" value="Endereço:" />
+					<h:inputText id="end" value="#{pessoaBean.pessoa.endereco}" />
+
+					<h:outputLabel for="ba" value="Bairro:" />
+					<h:inputText id="ba" value="#{pessoaBean.pessoa.bairro}" />
+
+					<h:outputLabel for="cel" value="Celular:" />
+					<h:inputText id="cel" value="#{pessoaBean.pessoa.celular}" />
+
+					<h:outputLabel for="res" value="Residencial" />
+					<h:inputText id="res" value="#{pessoaBean.pessoa.residencial}" />
+
+					<h:outputLabel for="celPai" value="Celular do Pai:" />
+					<h:inputText id="celPai" value="#{pessoaBean.pessoa.celularPai}" />
+
+					<h:outputLabel for="celMae" value="Celular da Mãe:" />
+					<h:inputText id="celMae" value="#{pessoaBean.pessoa.celularMae}" />
+
+				</h:panelGrid>
+				<h:commandButton value="Salvar" action="#{pessoaBean.salvar}">
+					<!-- <f:ajax execute="nmCurso desc" render="tabCursos" /> -->
+				</h:commandButton>
+
+				<h:commandButton value="limpar" action="#{pessoaBean.limpar}" />
+
+			</fieldset>
+
+		</h:form>
+
+		<h:form>
+
+			<fieldset>
+				<legend>Pessoas Cadastradas</legend>
+
+				<h:panelGrid columns="2" id="tabDadosPessoais">
+
+					<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" border="1"
+						id="tabPessoas">
+
+						<h:column>
+							<f:facet name="header">NOME</f:facet>
+							<h:outputText value="#{pessoa.nome}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">CPF</f:facet>
+							<h:outputText value="#{pessoa.cpf}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">E-MAIL</f:facet>
+							<h:outputText value="#{pessoa.email}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">ENDEREÇO</f:facet>
+							<h:outputText value="#{pessoa.endereco}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">BAIRRO</f:facet>
+							<h:outputText value="#{pessoa.bairro}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">CELULAR</f:facet>
+							<h:outputText value="#{pessoa.celular}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">RESIDENCIAL</f:facet>
+							<h:outputText value="#{pessoa.residencial}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">CELULAR DO PAI</f:facet>
+							<h:outputText value="#{pessoa.celularPai}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">CELULAR DA MÃE</f:facet>
+							<h:outputText value="#{pessoa.celularMae}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Editar</f:facet>
+							<h:commandLink value="Editar"
+								action="#{pessoaBean.editar(pessoa)}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Excluir</f:facet>
+							<h:commandLink value="Excluir"
+								action="#{pessoaBean.excluir(pessoa)}" />
+						</h:column>
+
+					</h:dataTable>
+
+				</h:panelGrid>
+			</fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+			<h:messages id="messages" />
+			<fieldset>
+				<legend>Dados Pessoais</legend>
+
+				<h:panelGrid columns="10" id="panelPessoa">
+
+					<h:outputLabel for="nm" value="Nome:" />
+					<h:inputText id="nm" value="#{ligacaoBean.pessoa.nome}" />
+
+					<h:outputLabel for="sn" value="Sobrenome:" />
+					<h:inputText id="sn" value="#{ligacaoBean.pessoa.sobreNome}" />
+
+					<h:outputLabel for="cpf" value="CPF:" />
+					<h:inputText id="cpf" value="#{ligacaoBean.pessoa.cpf}" />
+
+					<h:outputLabel for="email" value="E-mail:" />
+					<h:inputText id="email" value="#{ligacaoBean.pessoa.email}" />
+
+					<h:outputLabel for="nmPai" value="Pai:" />
+					<h:inputText id="nmPai" value="#{ligacaoBean.pessoa.pai}" />
+
+					<h:outputLabel for="nmMae" value="Mãe:" />
+					<h:inputText id="nmMae" value="#{ligacaoBean.pessoa.mae}" />
+
+					<h:outputLabel for="cep" value="CEP:" />
+					<h:inputText id="cep" value="#{ligacaoBean.pessoa.cep}" />
+
+					<h:outputLabel for="end" value="Endereço:" />
+					<h:inputText id="end" value="#{ligacaoBean.pessoa.endereco}" />
+
+					<h:outputLabel for="ba" value="Bairro:" />
+					<h:inputText id="ba" value="#{ligacaoBean.pessoa.bairro}" />
+
+					<h:outputLabel for="cel" value="Celular:" />
+					<h:inputText id="cel" value="#{ligacaoBean.pessoa.celular}" />
+
+					<h:outputLabel for="res" value="Residencial" />
+					<h:inputText id="res" value="#{ligacaoBean.pessoa.residencial}" />
+
+					<h:outputLabel for="celPai" value="Celular do Pai:" />
+					<h:inputText id="celPai" value="#{ligacaoBean.pessoa.celularPai}" />
+
+					<h:outputLabel for="celMae" value="Celular da Mãe:" />
+					<h:inputText id="celMae" value="#{ligacaoBean.pessoa.celularMae}" />
+
+				</h:panelGrid>
+				<h:commandButton value="Salvar" action="#{ligacaoBean.salvarPessoa}">
+				</h:commandButton>
+
+			</fieldset>
+		</h:form>
+		<h:form>
+
+			<fieldset>
+
+				<legend>Todas as ligações</legend>
+
+				<h:panelGrid columns="2" id="panelLigacoes">
+
+					<h:panelGroup>
+
+						<h:dataTable value="#{ligacaoBean.pessoa.ligacoes}" var="ligacao"
+							border="1" rows="10">
+
+							<h:column>
+								<f:facet name="header">Id da Ligação</f:facet>
+								<h:outputText value="#{ligacao.id}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Data da Ligação</f:facet>
+								<h:commandLink action="#{ligacaoBean.buscarLigacaoPor(ligacao)}">
+									<h:outputText value="#{ligacao.dataLigacao.time}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+								</h:commandLink>
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Inicio da Ligação</f:facet>
+								<h:outputText value="#{ligacao.inicio}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Fim da Ligação</f:facet>
+								<h:outputText value="#{ligacao.fim}" />
+							</h:column>
+
+							<h:column id="excluir">
+								<f:facet name="header">Excluir</f:facet>
+								<h:commandLink value="Excluir"
+									action="#{ligacaoBean.excluirLigacaoDaPessoa(ligacao)}">
+									<!-- <f:ajax execute="panelLigacoes" render="panelLigacoes" /> -->
+								</h:commandLink>
+							</h:column>
+
+						</h:dataTable>
+
+					</h:panelGroup>
+
+				</h:panelGrid>
+
+			</fieldset>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>
